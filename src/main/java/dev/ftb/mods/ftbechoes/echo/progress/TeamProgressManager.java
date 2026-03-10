@@ -9,6 +9,7 @@ import dev.ftb.mods.ftbechoes.net.ClaimRewardResponseMessage;
 import dev.ftb.mods.ftbechoes.net.SyncProgressMessage;
 import dev.ftb.mods.ftbechoes.shopping.ShopData;
 import dev.ftb.mods.ftbechoes.shopping.ShoppingKey;
+import dev.ftb.mods.ftbechoes.util.MiscUtil;
 import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import dev.ftb.mods.ftbteams.api.Team;
 import net.minecraft.ChatFormatting;
@@ -118,9 +119,7 @@ public class TeamProgressManager extends SavedData {
 
         if (currentStage >= 0 && currentStage < echo.stages().size()) {
             EchoStage stage = echo.stages().get(currentStage);
-            // TODO update to:
-            //if (TeamStages.hasTeamStage(team, stage.requiredGameStage()) && completeStage(team, echo)) {
-            if (FTBEchoes.stageProvider().has(sp, stage.requiredGameStage()) && completeStage(team, echo)) {
+            if (MiscUtil.hasStage(sp, team, stage.requiredGameStage()) && completeStage(team, echo)) {
                 notifyTeamCompletion(team, echo, currentStage);
             }
             stage.completionReward().ifPresent(reward -> {

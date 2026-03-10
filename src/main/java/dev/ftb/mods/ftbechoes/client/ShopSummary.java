@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,8 +46,7 @@ public enum ShopSummary {
                     if (!data.stacks().isEmpty()) {
                         SummaryItem summary = new SummaryItem(data, echo.title(), stage.title());
                         for (ItemStack stack : data.stacks()) {
-                            int key = itemKey(stack);
-                            byItemHash.computeIfAbsent(key, k -> new ArrayList<>()).add(summary);
+                            byItemHash.computeIfAbsent(itemKey(stack), k -> new ArrayList<>()).add(summary);
                         }
                         allShopData.add(summary);
                     }
@@ -56,8 +56,13 @@ public enum ShopSummary {
     }
 
     private static int itemKey(ItemStack stack) {
-        // note: ignoring component data for the purposes of JEI
-        return BuiltInRegistries.ITEM.getId(stack.getItem());
+        if (stack.getItem() == Items.POTION) {
+            // special case for potions: take component data into account
+            return ItemStack.hashItemAndComponents(stack);
+        } else {
+            // other items just care about the item itself
+            return BuiltInRegistries.ITEM.getId(stack.getItem());
+        }
     }
 
     public record SummaryItem(ShopData data, Component echoTitle, Component stageTitle) {

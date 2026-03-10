@@ -17,8 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
-// Will be replaced by TeamStageCommand soon
-@Deprecated
 public class StageCommand {
     private static final SimpleCommandExceptionType ERROR_ADD_FAILED
             = new SimpleCommandExceptionType(Component.translatable("commands.tag.add.failed"));

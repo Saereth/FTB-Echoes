@@ -32,6 +32,17 @@
           "cost": 6
         },
         {
+          "name": "luck_1",
+          "item": {
+            "id": "minecraft:potion",
+            "count": 1,
+            "components": {
+              "minecraft:potion_contents": { "potion": "luck" }
+            }
+          },
+          "cost": 3
+        },
+        {
           "name": "Loot Crate: tbl1",
           "item": {
             "id": "ftbquests:lootcrate",
@@ -97,5 +108,5 @@
       }
     }
   ],
-  "all_complete": { "text": "You did it!", "color": "ftb:rainbow" }
+  "all_complete": { "text": "You did it! This is a very long message which should wrap because it's so long. Yes it is very long and doesn't have any linebreaks.", "color": "ftb:rainbow" }
 }

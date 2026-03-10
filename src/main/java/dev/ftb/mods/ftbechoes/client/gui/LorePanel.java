@@ -1,6 +1,5 @@
 package dev.ftb.mods.ftbechoes.client.gui;
 
-import dev.ftb.mods.ftbechoes.FTBEchoes;
 import dev.ftb.mods.ftbechoes.client.ClientProgress;
 import dev.ftb.mods.ftbechoes.client.PersistedClientData;
 import dev.ftb.mods.ftbechoes.client.gui.widget.ClaimRewardButton;
@@ -9,10 +8,12 @@ import dev.ftb.mods.ftbechoes.client.gui.widget.HorizontalLineWidget;
 import dev.ftb.mods.ftbechoes.client.gui.widget.ImageButton;
 import dev.ftb.mods.ftbechoes.echo.Echo;
 import dev.ftb.mods.ftbechoes.echo.EchoStage;
+import dev.ftb.mods.ftbechoes.util.MiscUtil;
 import dev.ftb.mods.ftblibrary.icon.Color4I;
 import dev.ftb.mods.ftblibrary.icon.Icon;
 import dev.ftb.mods.ftblibrary.ui.*;
 import dev.ftb.mods.ftblibrary.ui.input.MouseButton;
+import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,7 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-class LorePanel extends EchoScreen.PagePanel /*implements AudioButtonHolder*/ {
+class LorePanel extends EchoScreen.PagePanel {
     private final List<Widget> jumpPointWidgets = new ArrayList<>();
 
     public LorePanel(Panel parent, EchoScreen echoScreen) {
@@ -60,9 +61,7 @@ class LorePanel extends EchoScreen.PagePanel /*implements AudioButtonHolder*/ {
                     vSpace(5);
                 }
                 if (stageIdx == limit && stageIdx < stages.size() && !allCompleted) {
-                    // TODO update to:
-//                    if (TeamStages.hasTeamStage(FTBTeamsAPI.api().getClientManager().selfTeam(), stage.requiredGameStage())) {
-                    if (FTBEchoes.stageProvider().has(player, stage.requiredGameStage())) {
+                    if (MiscUtil.hasStage(Minecraft.getInstance().player, FTBTeamsAPI.api().getClientManager().selfTeam(), stage.requiredGameStage())) {
                         if (!collapsed) {
                             add(new BorderedTextField(this).setText(stage.ready()));
                         }

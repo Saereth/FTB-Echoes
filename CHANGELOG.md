@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [21.1.7]
+
+### Added
+- Support for team stages implementation in FTB Teams 2101.1.8
+  - Player-based stages are still checked for, but teams stage of same name is also checked if player stage not present
+  - Team stages can be queried/modified with the `/ftbteams teamstage` command
+
+### Fixed
+- JEI searches for potions or other items with component data now check for the component data
+  - Avoids extraneous results when searching on such items
+- Prevent client crash if data in `local/ftbechoes/*.snbt` is corrupted
+  - Now just logs an error and proceeds with default persisted client data
+
 ## [21.1.6]
 
 ### Added
